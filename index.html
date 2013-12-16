@@ -4,13 +4,14 @@
 	<title>نمایش درخت تجزیه وابستگی</title>
 </head>
 <body>
-<link rel="stylesheet" href="bootstrap.css">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="tree.css">
 <script type="text/javascript" src="d3.js"></script>
 <script type="text/javascript" src="dependency-tree.js"></script>
 
 <div class="container">
-<h1>نمایش درخت تجزیه وابستگی</h1>
+<h2>نمایش درخت تجزیه وابستگی</h2>
 <div class="tree">
 	<svg height="0"></svg>
 </div>
@@ -31,26 +32,9 @@
 </textarea>
 <button id="draw" class="btn btn-default">نمایش</button>
 </div>
-<style type="text/css">
-	body {
-		direction: rtl;
-	}
-	.container {
-		max-width: 900px;
-	}
-	textarea {
-		direction: ltr;
-		font-family: serif;
-		tab-size: 15;
-		min-height: 300px;
-	}
-	#draw {
-		margin-top: 5px;
-	}
-</style>
 <script type="text/javascript">
 	d3.select('#draw').on('click', function() {
-		drawTree('.tree svg', d3.select('#data')[0][0].innerHTML, false);
+		drawTree('.tree svg', d3.select('#data')[0][0].value, false);
 	});
 	d3.select('#draw').on('click')();
 </script>
