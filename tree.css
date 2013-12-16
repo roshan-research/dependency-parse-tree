@@ -1,0 +1,35 @@
+.tree {
+	font-family: BMitra, 'B Mitra';
+	font-size: 18px;
+	direction: rtl;
+}
+.word, .tag, .label {
+	text-anchor: middle;
+}
+.word {
+	fill: #555;
+	cursor: default;
+}
+.tag {
+	fill: #777;
+	font-size: .9em;
+}
+.edge, .arrow {
+	fill: none;
+	stroke: #ccc;
+	stroke-width: 1.5;
+}
+.label {
+	fill: #ccc;
+	font-size: 15px;
+}
+
+.label.active {
+	fill: #3276b1;
+}
+.word.active, .edge.active, .arrow.active {
+	stroke: #3276b1;
+}
+.word.w0 {
+	fill: #ccc;
+}
