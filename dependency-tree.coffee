@@ -36,12 +36,12 @@ window.drawTree = (svgElement, conllData) ->
 		.attr('x', (d) -> treeWidth - wordWidth*d.id+1)
 		.attr('y', treeHeight-wordHeight)
 		.on 'mouseover', (d) ->
-			d3.selectAll('.word, .label, .edge, .arrow').classed('active', false)
+			d3.selectAll('.word, .dependency, .edge, .arrow').classed('active', false)
 			d3.selectAll('.tag').attr('opacity', 0)
 			d3.selectAll(".w#{d.id}").classed('active', true)
 			d3.select(".tag.w#{d.id}").attr('opacity', 1)
 		.on 'mouseout', (d) ->
-			d3.selectAll('.word, .label, .edge, .arrow').classed('active', false)
+			d3.selectAll('.word, .dependency, .edge, .arrow').classed('active', false)
 			d3.selectAll('.tag').attr('opacity', 0)
 
 	tags = svg.selectAll('.tag').data(data).enter()
@@ -58,11 +58,11 @@ window.drawTree = (svgElement, conllData) ->
 		.attr('class', (d) -> "edge w#{d.id} w#{d.parent}")
 		.attr('d', (d) -> "M#{d.left},#{d.bottom} C#{d.mid-d.diff},#{d.top} #{d.mid+d.diff},#{d.top} #{d.right},#{d.bottom}")
 
-	labels = svg.selectAll('.label').data(data).enter()
+	dependencies = svg.selectAll('.dependency').data(data).enter()
 		.append('text')
 		.filter((d) -> d.id)
-		.text((d) -> d.label)
-		.attr('class', (d) -> "label w#{d.id} w#{d.parent}")
+		.text((d) -> d.dependency)
+		.attr('class', (d) -> "dependency w#{d.id} w#{d.parent}")
 		.attr('x', (d) -> d.mid)
 		.attr('y', (d) -> d.arrow - 7)
 
@@ -86,14 +86,14 @@ parseConll = (conllData) ->
 	data = []
 	data.push id: 0, word: 'ریشه', tag: tagDict['ROOT'], level: 0
 	for line in conllData.split('\n') when line
-		[id, word, _, cpos, fpos, _, parent, label] = line.split('\t')
+		[id, word, _, cpos, fpos, _, parent, dependency] = line.split('\t')
 		tag = if cpos != fpos then tagDict[cpos]+' '+tagDict[fpos] else tagDict[cpos]
-		data.push id: Number(id), word: word, tag: tag, parent: Number(parent), label: labelDict[label], level: 1
+		data.push id: Number(id), word: word, tag: tag, parent: Number(parent), dependency: dependencyDict[dependency], level: 1
 	data
 
 
 # dictionary
-labelDict =
+dependencyDict =
 	'': '', 'NE': 'اسم‌یار', 'PART': 'افزودۀ پرسشی فعل', 'APP': 'بدل', 'NCL': 'بند اسم', 'AJUCL': 'بند افزودۀ فعل', 'PARCL': 'بند فعل وصفی', 'TAM': 'تمییز', 'NPRT': 'جزء اسمی', 'LVP': 'جزء همکرد', 'NPP': 'حرف اضافه اسم', 'VPRT': 'حرف اضافه فعلی', 'COMPPP': 'حرف اضافۀ تفضیلی', 'ROOT': 'ریشه جمله', 'NPOSTMOD': 'صفت پسین اسم', 'NPREMOD': 'صفت پیشین اسم', 'PUNC': 'علائم نگارشی', 'SBJ': 'فاعل', 'NVE': 'فعل‌یار', 'ENC': 'فعل‏یار پی‏بستی', 'ADV': 'قید', 'NADV': 'قید اسم', 'PRD': 'گزاره', 'ACL': 'متمم بندی صفت', 'VCL': 'متمم بندی فعل', 'AJPP': 'متمم حرف اضافه‌ای صفت', 'ADVC': 'متمم قیدی فعل', 'NEZ': 'متمم نشانۀ اضافه‌ای صفت', 'PROG': 'مستمرساز', 'MOS': 'مسند', 'MOZ': 'مضافٌ‌الیه', 'OBJ': 'مفعول', 'VPP': 'مفعول حرف اضافه‌ای', 'OBJ2': 'مفعول دوم', 'MESU': 'ممیز', 'AJCONJ': 'هم‌پایه صفت', 'PCONJ': 'هم‌پایۀ حرف اضافه', 'NCONJ': 'هم‏پایه اسم', 'VCONJ': 'هم‏پایه فعل', 'AVCONJ': 'هم‏پایه قید', 'POSDEP': 'وابسته پسین', 'PREDEP': 'وابسته پیشین', 'APOSTMOD': 'وابستۀ پسین صفت', 'APREMOD': 'وابستۀ پیشین صفت'
 
 tagDict =

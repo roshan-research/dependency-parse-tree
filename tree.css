@@ -3,7 +3,7 @@
 	font-size: 18px;
 	direction: rtl;
 }
-.word, .tag, .label {
+.word, .tag, .dependency {
 	text-anchor: middle;
 }
 .word {
@@ -19,12 +19,12 @@
 	stroke: #ccc;
 	stroke-width: 1.5;
 }
-.label {
+.dependency {
 	fill: #ccc;
 	font-size: 15px;
 }
 
-.label.active {
+.dependency.active {
 	fill: #3276b1;
 }
 .word.active, .edge.active, .arrow.active {
