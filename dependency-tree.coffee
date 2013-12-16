@@ -14,7 +14,7 @@ window.drawTree = (svgElement, conllData) ->
 			edge.level = 1 + maximum(e.level for e in edges when under(edge, e))
 
 	# compute height
-	treeWidth = wordWidth*data.length
+	treeWidth = wordWidth*data.length - wordWidth/2
 	treeHeight = levelHeight(maximum(edge.level for edge in data)) + 2 * wordHeight
 	for item in data
 		item.bottom = treeHeight - 1.8 * wordHeight
@@ -27,13 +27,13 @@ window.drawTree = (svgElement, conllData) ->
 
 	# draw svg
 	svg.selectAll('text, path').remove()
-	svg.attr('width', treeWidth+wordWidth).attr('height', treeHeight+wordHeight/2)
+	svg.attr('width', treeWidth + wordWidth/2).attr('height', treeHeight + wordHeight/2)
 
 	words = svg.selectAll('.word').data(data).enter()
 		.append('text')
 		.text((d) -> d.word)
 		.attr('class', (d) -> "word w#{d.id}")
-		.attr('x', (d) -> treeWidth - wordWidth*d.id+1)
+		.attr('x', (d) -> treeWidth - wordWidth*d.id)
 		.attr('y', treeHeight-wordHeight)
 		.on 'mouseover', (d) ->
 			d3.selectAll('.word, .dependency, .edge, .arrow').classed('active', false)
