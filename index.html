@@ -1,0 +1,59 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>نمایش درخت تجزیه وابستگی</title>
+</head>
+<body>
+<link rel="stylesheet" href="bootstrap.css">
+<link rel="stylesheet" href="tree.css">
+<script type="text/javascript" src="d3.js"></script>
+<script type="text/javascript" src="dependency-tree.js"></script>
+
+<div class="container">
+<h1>نمایش درخت تجزیه وابستگی</h1>
+
+<textarea id="data" class="form-control">
+1	از	_	PREP	PREP	_	12	VPP	_	_
+2	نصایح	_	N	IANM	_	1	POSDEP	_	_
+3	باارزش	_	ADJ	AJP	_	2	NPOSTMOD	_	_
+4	مولای	_	N	ANM	_	2	MOZ	_	_
+5	متقیان	_	N	ANM	_	4	MOZ	_	_
+6	حضرت	_	N	ANM	_	4	APP	_	_
+7	علی	_	N	ANM	_	6	MOZ	_	_
+8	(	_	PUNC	PUNC	_	9	PUNC	_	_
+9	علیه‌السلام	_	N	IANM	_	7	POSDEP	_	_
+10	)	_	PUNC	PUNC	_	9	PUNC	_	_
+11	پند	_	N	IANM	_	12	NVE	_	_
+12	بگیرید	_	V	ACT	_	0	ROOT	_	_
+13	.	_	PUNC	PUNC	_	12	PUNC	_	_
+</textarea>
+	<button id="draw" class="btn btn-default">نمایش</button>
+
+	<div class="tree">
+		<svg></svg>
+	</div>
+</div>
+<style type="text/css">
+	body {
+		direction: rtl;
+	}
+	.container {
+		max-width: 800px;
+	}
+	textarea {
+		direction: ltr;
+		font-family: serif;
+		tab-size: 15;
+		min-height: 300px;
+	}
+	#draw {
+		margin-top: 5px;
+	}
+</style>
+<script type="text/javascript">
+	d3.select('#draw').on('click', function() {
+		drawTree('.tree svg', d3.select('#data')[0][0].innerHTML, false);
+	});
+</script>
+</body>
+</html>
