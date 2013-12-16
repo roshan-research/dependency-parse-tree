@@ -11,7 +11,9 @@
 
 <div class="container">
 <h1>نمایش درخت تجزیه وابستگی</h1>
-
+<div class="tree">
+	<svg height="0"></svg>
+</div>
 <textarea id="data" class="form-control">
 1	از	_	PREP	PREP	_	12	VPP	_	_
 2	نصایح	_	N	IANM	_	1	POSDEP	_	_
@@ -27,18 +29,14 @@
 12	بگیرید	_	V	ACT	_	0	ROOT	_	_
 13	.	_	PUNC	PUNC	_	12	PUNC	_	_
 </textarea>
-	<button id="draw" class="btn btn-default">نمایش</button>
-
-	<div class="tree">
-		<svg></svg>
-	</div>
+<button id="draw" class="btn btn-default">نمایش</button>
 </div>
 <style type="text/css">
 	body {
 		direction: rtl;
 	}
 	.container {
-		max-width: 800px;
+		max-width: 900px;
 	}
 	textarea {
 		direction: ltr;
@@ -54,6 +52,7 @@
 	d3.select('#draw').on('click', function() {
 		drawTree('.tree svg', d3.select('#data')[0][0].innerHTML, false);
 	});
+	d3.select('#draw').on('click')();
 </script>
 </body>
 </html>

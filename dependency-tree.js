@@ -40,7 +40,7 @@ window.drawTree = function(svgElement, conllData) {
       })());
     }
   }
-  treeWidth = wordWidth * data.length;
+  treeWidth = wordWidth * data.length - wordWidth / 2;
   treeHeight = levelHeight(maximum((function() {
     var _k, _len2, _results;
     _results = [];
@@ -61,13 +61,13 @@ window.drawTree = function(svgElement, conllData) {
     item.arrow = item.top + (item.bottom - item.top) * .25;
   }
   svg.selectAll('text, path').remove();
-  svg.attr('width', treeWidth + wordWidth).attr('height', treeHeight + wordHeight / 2);
+  svg.attr('width', treeWidth + wordWidth / 2).attr('height', treeHeight + wordHeight / 2);
   words = svg.selectAll('.word').data(data).enter().append('text').text(function(d) {
     return d.word;
   }).attr('class', function(d) {
     return "word w" + d.id;
   }).attr('x', function(d) {
-    return treeWidth - wordWidth * d.id + 1;
+    return treeWidth - wordWidth * d.id;
   }).attr('y', treeHeight - wordHeight).on('mouseover', function(d) {
     d3.selectAll('.word, .dependency, .edge, .arrow').classed('active', false);
     d3.selectAll('.tag').attr('opacity', 0);

@@ -1,7 +1,8 @@
 .tree {
+	direction: rtl;
 	font-family: BMitra, 'B Mitra';
 	font-size: 18px;
-	direction: rtl;
+	text-align: center;
 }
 .word, .tag, .dependency {
 	text-anchor: middle;
