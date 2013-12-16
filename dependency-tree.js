@@ -5,7 +5,7 @@ wordWidth = 60;
 wordHeight = 20;
 
 levelHeight = function(level) {
-  return level * level * 10;
+  return 2 + Math.pow(level, 1.8) * 10;
 };
 
 window.drawTree = function(svgElement, conllData) {
@@ -57,7 +57,7 @@ window.drawTree = function(svgElement, conllData) {
     item.left = treeWidth - item.id * wordWidth;
     item.right = treeWidth - item.parent * wordWidth;
     item.mid = (item.right + item.left) / 2;
-    item.diff = (item.right - item.left) / 3;
+    item.diff = (item.right - item.left) / 4;
     item.arrow = item.top + (item.bottom - item.top) * .25;
   }
   svg.selectAll('text, path').remove();
