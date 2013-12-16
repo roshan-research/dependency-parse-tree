@@ -1,4 +1,4 @@
-var labelDict, levelHeight, maximum, parseConll, tagDict, under, wordHeight, wordWidth;
+var dependencyDict, levelHeight, maximum, parseConll, tagDict, under, wordHeight, wordWidth;
 
 wordWidth = 60;
 
@@ -9,7 +9,7 @@ levelHeight = function(level) {
 };
 
 window.drawTree = function(svgElement, conllData) {
-  var arrows, data, e, edge, edges, item, labels, svg, tags, treeHeight, treeWidth, triangle, words, _i, _j, _k, _len, _len1, _len2;
+  var arrows, data, dependencies, e, edge, edges, item, svg, tags, treeHeight, treeWidth, triangle, words, _i, _j, _k, _len, _len1, _len2;
   svg = d3.select(svgElement);
   data = parseConll(conllData);
   edges = (function() {
@@ -69,12 +69,12 @@ window.drawTree = function(svgElement, conllData) {
   }).attr('x', function(d) {
     return treeWidth - wordWidth * d.id + 1;
   }).attr('y', treeHeight - wordHeight).on('mouseover', function(d) {
-    d3.selectAll('.word, .label, .edge, .arrow').classed('active', false);
+    d3.selectAll('.word, .dependency, .edge, .arrow').classed('active', false);
     d3.selectAll('.tag').attr('opacity', 0);
     d3.selectAll(".w" + d.id).classed('active', true);
     return d3.select(".tag.w" + d.id).attr('opacity', 1);
   }).on('mouseout', function(d) {
-    d3.selectAll('.word, .label, .edge, .arrow').classed('active', false);
+    d3.selectAll('.word, .dependency, .edge, .arrow').classed('active', false);
     return d3.selectAll('.tag').attr('opacity', 0);
   });
   tags = svg.selectAll('.tag').data(data).enter().append('text').text(function(d) {
@@ -91,12 +91,12 @@ window.drawTree = function(svgElement, conllData) {
   }).attr('d', function(d) {
     return "M" + d.left + "," + d.bottom + " C" + (d.mid - d.diff) + "," + d.top + " " + (d.mid + d.diff) + "," + d.top + " " + d.right + "," + d.bottom;
   });
-  labels = svg.selectAll('.label').data(data).enter().append('text').filter(function(d) {
+  dependencies = svg.selectAll('.dependency').data(data).enter().append('text').filter(function(d) {
     return d.id;
   }).text(function(d) {
-    return d.label;
+    return d.dependency;
   }).attr('class', function(d) {
-    return "label w" + d.id + " w" + d.parent;
+    return "dependency w" + d.id + " w" + d.parent;
   }).attr('x', function(d) {
     return d.mid;
   }).attr('y', function(d) {
@@ -123,7 +123,7 @@ under = function(edge1, edge2) {
 };
 
 parseConll = function(conllData) {
-  var cpos, data, fpos, id, label, line, parent, tag, word, _, _i, _len, _ref, _ref1;
+  var cpos, data, dependency, fpos, id, line, parent, tag, word, _, _i, _len, _ref, _ref1;
   data = [];
   data.push({
     id: 0,
@@ -137,21 +137,21 @@ parseConll = function(conllData) {
     if (!(line)) {
       continue;
     }
-    _ref1 = line.split('\t'), id = _ref1[0], word = _ref1[1], _ = _ref1[2], cpos = _ref1[3], fpos = _ref1[4], _ = _ref1[5], parent = _ref1[6], label = _ref1[7];
+    _ref1 = line.split('\t'), id = _ref1[0], word = _ref1[1], _ = _ref1[2], cpos = _ref1[3], fpos = _ref1[4], _ = _ref1[5], parent = _ref1[6], dependency = _ref1[7];
     tag = cpos !== fpos ? tagDict[cpos] + ' ' + tagDict[fpos] : tagDict[cpos];
     data.push({
       id: Number(id),
       word: word,
       tag: tag,
       parent: Number(parent),
-      label: labelDict[label],
+      dependency: dependencyDict[dependency],
       level: 1
     });
   }
   return data;
 };
 
-labelDict = {
+dependencyDict = {
   '': '',
   'NE': 'اسم‌یار',
   'PART': 'افزودۀ پرسشی فعل',
