@@ -3,6 +3,8 @@
 	font-family: BMitra, 'B Mitra';
 	font-size: 18px;
 	text-align: center;
+	overflow-y: hidden;
+	overflow-x: auto;
 }
 .word, .tag, .dependency {
 	text-anchor: middle;
