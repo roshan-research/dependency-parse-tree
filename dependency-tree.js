@@ -70,13 +70,13 @@ window.drawTree = function(svgElement, conllData) {
   }).attr('x', function(d) {
     return treeWidth - wordWidth * d.id;
   }).attr('y', treeHeight - wordHeight).on('mouseover', function(d) {
-    d3.selectAll('.word, .dependency, .edge, .arrow').classed('active', false);
-    d3.selectAll('.tag').attr('opacity', 0);
-    d3.selectAll(".w" + d.id).classed('active', true);
-    return d3.select(".tag.w" + d.id).attr('opacity', 1);
+    svg.selectAll('.word, .dependency, .edge, .arrow').classed('active', false);
+    svg.selectAll('.tag').attr('opacity', 0);
+    svg.selectAll(".w" + d.id).classed('active', true);
+    return svg.select(".tag.w" + d.id).attr('opacity', 1);
   }).on('mouseout', function(d) {
-    d3.selectAll('.word, .dependency, .edge, .arrow').classed('active', false);
-    return d3.selectAll('.tag').attr('opacity', 0);
+    svg.selectAll('.word, .dependency, .edge, .arrow').classed('active', false);
+    return svg.selectAll('.tag').attr('opacity', 0);
   });
   tags = svg.selectAll('.tag').data(data).enter().append('text').text(function(d) {
     return d.tag;
