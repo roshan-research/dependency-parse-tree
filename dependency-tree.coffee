@@ -36,13 +36,13 @@ window.drawTree = (svgElement, conllData) ->
 		.attr('x', (d) -> treeWidth - wordWidth*d.id)
 		.attr('y', treeHeight-wordHeight)
 		.on 'mouseover', (d) ->
-			d3.selectAll('.word, .dependency, .edge, .arrow').classed('active', false)
-			d3.selectAll('.tag').attr('opacity', 0)
-			d3.selectAll(".w#{d.id}").classed('active', true)
-			d3.select(".tag.w#{d.id}").attr('opacity', 1)
+			svg.selectAll('.word, .dependency, .edge, .arrow').classed('active', false)
+			svg.selectAll('.tag').attr('opacity', 0)
+			svg.selectAll(".w#{d.id}").classed('active', true)
+			svg.select(".tag.w#{d.id}").attr('opacity', 1)
 		.on 'mouseout', (d) ->
-			d3.selectAll('.word, .dependency, .edge, .arrow').classed('active', false)
-			d3.selectAll('.tag').attr('opacity', 0)
+			svg.selectAll('.word, .dependency, .edge, .arrow').classed('active', false)
+			svg.selectAll('.tag').attr('opacity', 0)
 
 	tags = svg.selectAll('.tag').data(data).enter()
 		.append('text')
