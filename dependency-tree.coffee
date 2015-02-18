@@ -27,6 +27,7 @@ window.drawTree = (svgElement, conllData) ->
 
 	# draw svg
 	svg.selectAll('text, path').remove()
+	svg.attr('xmlns', 'http://www.w3.org/2000/svg')
 	svg.attr('width', treeWidth + 2*wordWidth/3).attr('height', treeHeight + wordHeight/2)
 
 	words = svg.selectAll('.word').data(data).enter()
@@ -43,6 +44,7 @@ window.drawTree = (svgElement, conllData) ->
 		.on 'mouseout', (d) ->
 			svg.selectAll('.word, .dependency, .edge, .arrow').classed('active', false)
 			svg.selectAll('.tag').attr('opacity', 0)
+		.attr('text-anchor', 'middle')
 
 	tags = svg.selectAll('.tag').data(data).enter()
 		.append('text')
@@ -51,12 +53,17 @@ window.drawTree = (svgElement, conllData) ->
 		.attr('x', (d) -> treeWidth - wordWidth*d.id)
 		.attr('y', treeHeight)
 		.attr('opacity', 0)
+		.attr('text-anchor', 'middle')
+		.attr('font-size', '90%')
 
 	edges = svg.selectAll('.edge').data(data).enter()
 		.append('path')
 		.filter((d) -> d.id)
 		.attr('class', (d) -> "edge w#{d.id} w#{d.parent}")
 		.attr('d', (d) -> "M#{d.left},#{d.bottom} C#{d.mid-d.diff},#{d.top} #{d.mid+d.diff},#{d.top} #{d.right},#{d.bottom}")
+		.attr('fill', 'none')
+		.attr('stroke', 'black')
+		.attr('stroke-width', '1.5')
 
 	dependencies = svg.selectAll('.dependency').data(data).enter()
 		.append('text')
@@ -65,6 +72,8 @@ window.drawTree = (svgElement, conllData) ->
 		.attr('class', (d) -> "dependency w#{d.id} w#{d.parent}")
 		.attr('x', (d) -> d.mid)
 		.attr('y', (d) -> d.arrow - 7)
+		.attr('text-anchor', 'middle')
+		.attr('font-size', '90%')
 
 	triangle = d3.svg.symbol().type('triangle-up').size(5)
 	arrows = svg.selectAll('.arrow').data(data).enter()
@@ -73,6 +82,9 @@ window.drawTree = (svgElement, conllData) ->
 		.attr('class', (d) -> "arrow w#{d.id} w#{d.parent}")
 		.attr('d', triangle)
 		.attr('transform', (d) -> "translate(#{d.mid}, #{d.arrow}) rotate(#{if d.id < d.parent then '' else '-'}90)")
+		.attr('fill', 'none')
+		.attr('stroke', 'black')
+		.attr('stroke-width', '1.5')
 
 
 # functions

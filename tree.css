@@ -6,25 +6,20 @@
 	overflow-y: hidden;
 	overflow-x: auto;
 }
-.word, .tag, .dependency {
-	text-anchor: middle;
-}
+
 .word {
 	fill: #555;
 	cursor: default;
 }
 .tag {
 	fill: #777;
-	font-size: .9em;
 }
 .edge, .arrow {
-	fill: none;
-	stroke: #ccc;
+	stroke: #ccc !important;
 	stroke-width: 1.5;
 }
 .dependency {
 	fill: #ccc;
-	font-size: 15px;
 }
 
 .dependency.active {
