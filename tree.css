@@ -26,7 +26,7 @@
 	fill: #3276b1;
 }
 .word.active, .edge.active, .arrow.active {
-	stroke: #3276b1;
+	stroke: #3276b1 !important;
 }
 .word.w0 {
 	fill: #ccc;
