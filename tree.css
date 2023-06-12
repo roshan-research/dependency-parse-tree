@@ -7,7 +7,7 @@
 	overflow-x: auto;
 }
 
-.word {
+.form {
 	fill: #555;
 	cursor: default;
 }
@@ -18,16 +18,16 @@
 	stroke: #ccc !important;
 	stroke-width: 1.5;
 }
-.dependency {
+.deprel {
 	fill: #ccc;
 }
 
-.dependency.active {
+.deprel.active {
 	fill: #3276b1;
 }
-.word.active, .edge.active, .arrow.active {
+.form.active, .edge.active, .arrow.active {
 	stroke: #3276b1 !important;
 }
-.word.w0 {
+.form.w0 {
 	fill: #ccc;
 }

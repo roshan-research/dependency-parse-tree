@@ -1,36 +1,33 @@
 .tree {
-  direction: rtl;
-  font-family: BMitra, "B Mitra";
-  font-size: 18px;
-  text-align: center;
-  overflow-y: hidden;
-  overflow-x: auto;
+	direction: rtl;
+	font-family: BMitra, 'B Mitra';
+	font-size: 18px;
+	text-align: center;
+	overflow-y: hidden;
+	overflow-x: auto;
 }
 
-.word {
-  fill: #555;
-  cursor: default;
+.form {
+	fill: #555;
+	cursor: default;
 }
 .tag {
-  fill: #777;
+	fill: #777;
 }
-.edge,
-.arrow {
-  stroke: #ccc !important;
-  stroke-width: 1.5;
+.edge, .arrow {
+	stroke: #ccc !important;
+	stroke-width: 1.5;
 }
-.dependency {
-  fill: #ccc;
+.deprel {
+	fill: #ccc;
 }
 
-.dependency.active {
-  fill: #3276b1;
+.deprel.active {
+	fill: #3276b1;
 }
-.word.active,
-.edge.active,
-.arrow.active {
-  stroke: #3276b1 !important;
+.form.active, .edge.active, .arrow.active {
+	stroke: #3276b1 !important;
 }
-.word.w0 {
-  fill: #ccc;
+.form.w0 {
+	fill: #ccc;
 }
