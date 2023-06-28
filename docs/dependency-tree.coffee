@@ -74,6 +74,7 @@ window.drawTree = (svgElement, conllData) ->
 		.attr('y', (d) -> d.arrow - 7)
 		.attr('text-anchor', 'middle')
 		.attr('font-size', '90%')
+		.append('title').text((d) -> dependencyDict[d.deprel])
 
 	triangle = d3.svg.symbol().type('triangle-up').size(5)
 	arrows = svg.selectAll('.arrow').data(data).enter()
@@ -105,7 +106,7 @@ parseConll = (conllData) ->
 		else
 			tag = tagDict[xpos]
 
-		data.push id: Number(id), form: form, tag: tag, head: Number(head), deprel: dependencyDict[deprel], level: 1
+		data.push id: Number(id), form: form, tag: tag, head: Number(head), deprel: deprel, level: 1
 	data
 
 
