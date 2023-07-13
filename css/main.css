@@ -1,0 +1,42 @@
+@font-face {
+  font-family: BMitra;
+  font-weight: normal;
+  src: url("../fonts/BMitra.eot?#") format("eot"),
+    url("../fonts/BMitra.woff") format("woff"),
+    url("../fonts/BMitra.ttf") format("truetype");
+}
+@font-face {
+  font-family: BMitra;
+  font-weight: bold;
+  src: url("../fonts/BMitraBold.eot?#") format("eot"),
+    url("../fonts/BMitraBold.woff") format("woff"),
+    url("../fonts/BMitraBold.ttf") format("truetype");
+}
+
+body {
+  direction: rtl;
+}
+h2,
+.btn {
+  font-family: BMitra, "B Mitra";
+}
+h2 {
+  font-weight: bold;
+}
+.btn {
+  font-size: 17px;
+  padding: 4px 8px 2px;
+}
+.container {
+  max-width: 900px;
+}
+textarea {
+  direction: ltr;
+  font-family: serif;
+  tab-size: 15;
+  min-height: 300px;
+  margin-top: 5px;
+}
+#draw {
+  margin-top: 5px;
+}
